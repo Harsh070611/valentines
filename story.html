@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh & Mahak — Forever Us</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ff5fa2;
+            --hot-pink: #ff2f92;
+            --rose: #ffd1e8;
+            --baby-blue: #a2d2ff;
+            --sky-blue: #bde0fe;
+            --lav: #cdb4db;
+        }
+
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at top, #2b0a1f 0%, transparent 60%),
+                linear-gradient(180deg, #0b0b0f, #050508);
+            font-family: 'Poppins', sans-serif;
+            color: #ffd6e8;
+        }
+
+
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.2rem;
+            background: linear-gradient(90deg, #ff5fa2, #ffd6e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(255, 95, 162, 0.6);
+        }
+
+        .subtitle {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 26px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 95, 162, 0.35);
+            backdrop-filter: blur(10px);
+            color: #ffd6e8;
+        }
+
+
+        /* SECTION */
+        .section-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            background: linear-gradient(90deg, #ff2f92, #ff9ecd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 47, 146, 0.7);
+            margin: 15px 0 25px;
+        }
+
+
+
+
+        /* MEMORIES GRID */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+
+        .memory {
+            position: relative;
+            height: 380px;
+            /* BIGGER */
+            border-radius: 34px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow:
+                0 30px 80px rgba(255, 95, 162, 0.35),
+                0 0 0 2px rgba(255, 255, 255, 0.25);
+            transition: 0.45s ease;
+        }
+
+        .memory:hover {
+            transform: scale(1.07) translateY(-14px);
+            box-shadow:
+                0 40px 100px rgba(162, 210, 255, 0.6),
+                0 0 0 3px rgba(255, 255, 255, 0.35);
+        }
+
+
+        .memory img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* show full image */
+            object-position: center;
+            /* center it */
+            background: #000;
+            /* black padding if aspect ratio differs */
+        }
+
+        .memory video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            background: #000;
+        }
+
+
+        .memory::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top,
+                    rgba(255, 47, 146, 0.75),
+                    rgba(162, 210, 255, 0.25),
+                    transparent);
+        }
+
+        .memory::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 38px;
+            pointer-events: none;
+            animation: heartbeatGlow 3.2s infinite;
+            z-index: 0;
+        }
+
+        /* HEARTBEAT GLOW — no transform */
+        @keyframes heartbeatGlow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 35px rgba(255, 77, 109, 0.35),
+                    0 0 0 rgba(0, 0, 0, 0);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 70px rgba(255, 77, 109, 0.7),
+                    0 0 120px rgba(0, 180, 255, 0.45);
+            }
+        }
+
+
+        .memory-text {
+            position: absolute;
+            bottom: 28px;
+            left: 22px;
+            color: #ffffff;
+            z-index: 2;
+        }
+
+
+        .memory-text h3 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+
+        .memory-text h3 {
+            font-size: 1.6rem;
+            margin: 0;
+        }
+
+        .memory-text span {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+
+        /* SECRET HEART */
+        .secret {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            font-size: 2.1rem;
+            z-index: 3;
+            cursor: pointer;
+            filter: drop-shadow(0 0 8px rgba(255, 95, 162, 0.9));
+            transition: transform 0.3s ease;
+        }
+
+        .secret:hover {
+            transform: scale(1.3) rotate(-8deg);
+        }
+
+
+        /* MEMORY MODAL */
+        .memory-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        /* The Image Style */
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        }
+
+        /* Mobile Tweak: Make image smaller on small screens */
+        @media (max-width: 400px) {
+            .modal-image {
+                max-height: 250px;
+            }
+        }
+
+        .memory-box {
+            width: 380px;
+            /* BIGGER */
+            height: 620px;
+            background:
+                linear-gradient(160deg,
+                    var(--hot-pink),
+                    var(--lav),
+                    var(--baby-blue));
+            border-radius: 40px;
+            padding: 34px;
+            box-shadow:
+                0 40px 100px rgba(255, 47, 146, 0.6);
+            animation: pop 0.45s ease;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+
+        .memory-box h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.9rem;
+            margin-bottom: 12px;
+        }
+
+
+        .memory-box p {
+            font-size: 1.25rem;
+            line-height: 2;
+            white-space: pre-line;
+        }
+
+
+        .date {
+            opacity: 0.9;
+            margin-top: 12px;
+        }
+
+        .close {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 2.2rem;
+            cursor: pointer;
+        }
+
+        /* MUSIC BUTTON */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4d6d;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            color: #c9184a;
+        }
+
+        /* =======================
+   VALENTINE WEEK (BLUE)
+   ======================= */
+
+        .valentine-week {
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 20px;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .week-card {
+            position: relative;
+            height: 360px;
+            border-radius: 32px;
+            overflow: hidden;
+            cursor: pointer;
+            background: rgba(10, 15, 30, 0.7);
+            box-shadow:
+                0 0 0 1px rgba(162, 210, 255, 0.3),
+                0 30px 90px rgba(72, 149, 239, 0.55);
+            opacity: 0;
+            transform: translateY(60px) scale(0.92);
+            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* TODAY'S SPECIAL GLOW */
+        .week-card.today {
+            animation: todayPulse 2.8s infinite;
+            box-shadow:
+                0 0 0 2px rgba(255, 255, 255, 0.6),
+                0 0 40px rgba(255, 77, 109, 0.9),
+                0 0 80px rgba(0, 180, 255, 0.6);
+        }
+
+        .week-card.today::before {
+            content: "TODAY 💖";
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff4d6d;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            z-index: 3;
+        }
+
+
+        /* Pulse animation */
+        @keyframes todayPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.04);
+            }
+        }
+
+        .week-card.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .week-card.show:hover {
+            transform: translateY(-12px) scale(1.07);
+            box-shadow:
+                0 0 0 2px rgba(162, 210, 255, 0.6),
+                0 40px 120px rgba(72, 149, 239, 0.85);
+        }
+
+
+        .week-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .week-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top,
+                    rgba(72, 149, 239, 0.85),
+                    rgba(0, 0, 0, 0.6),
+                    transparent);
+        }
+
+        .week-text {
+            position: absolute;
+            bottom: 28px;
+            left: 22px;
+            color: #e6f3ff;
+            z-index: 2;
+        }
+
+        .week-text h3 {
+            font-size: 1.9rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .week-text span {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Valentine Week Title */
+        .valentine-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.6rem;
+            background: linear-gradient(90deg, #4cc9f0, #a2d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 35px rgba(76, 201, 240, 0.8);
+            margin: 20px 0 30px;
+        }
+
+        /* Special Names Styling */
+
+        .special-names {
+            font-size: 3.8rem;
+            text-align: center;
+        }
+
+        /* & symbol */
+        .and {
+            color: white;
+            margin: 0 10px;
+        }
+
+        /* Neon Blue Lav */
+        .lav {
+            background: linear-gradient(90deg, #4cc9f0, #a2d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow:
+                0 0 10px rgba(76, 201, 240, 0.8),
+                0 0 25px rgba(76, 201, 240, 0.6),
+                0 0 45px rgba(76, 201, 240, 0.4);
+            font-weight: 700;
+        }
+
+        /* GIFTS */
+        .gift-grid {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            padding: 60px 20px;
+        }
+
+        /* CARD */
+        .gift-card {
+            width: 260px;
+            height: 420px;
+            background: #000;
+            border-radius: 34px;
+            overflow: hidden;
+            /* IMPORTANT */
+            text-align: center;
+            cursor: pointer;
+            transition: 0.45s ease;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-14px) scale(1.05);
+        }
+
+        /* IMAGE FULL WIDTH */
+        .gift-card img {
+            width: 100%;
+            height: 55%;
+            object-fit: cover;
+            /* FULL WIDTH COVER */
+            display: block;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+        }
+
+        /* TEXT */
+        .gift-card h2 {
+            margin-top: 18px;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 18px currentColor;
+        }
+
+        .gift-card h3 {
+            margin-top: 6px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        /* NEON THEMES */
+        .blue-neon {
+            border: 2px solid #00b4ff;
+            box-shadow:
+                0 0 25px #00b4ff,
+                0 0 60px rgba(0, 180, 255, 0.6);
+        }
+
+        .blue-neon h2,
+        .blue-neon h3 {
+            color: #00b4ff;
+        }
+
+        .pink-neon {
+            border: 2px solid #ff4d6d;
+            box-shadow:
+                0 0 25px #ff4d6d,
+                0 0 60px rgba(255, 77, 109, 0.6);
+        }
+
+        .pink-neon h2,
+        .pink-neon h3 {
+            color: #ff4d6d;
+        }
+
+        /* SOFT GLOW ON HOVER */
+        .gift-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.75),
+                    transparent 55%);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .gift-card:hover::after {
+            opacity: 1;
+        }
+
+
+        /* Neon Themes */
+        .blue-neon {
+            border: 2px solid #00b4ff;
+            box-shadow: 0 0 25px #00b4ff;
+        }
+
+        .blue-neon p {
+            color: #00b4ff;
+        }
+
+        .pink-neon {
+            border: 2px solid #ff4d6d;
+            box-shadow: 0 0 25px #ff4d6d;
+        }
+
+        .pink-neon p {
+            color: #ff4d6d;
+        }
+
+        /* STORY MODAL */
+        .story-modal {
+            position: fixed;
+            inset: 0;
+            background: black;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .story-box {
+            width: 360px;
+            height: 620px;
+            background: linear-gradient(160deg, #ff4d6d, #00b4ff);
+            border-radius: 40px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            animation: pop 0.5s ease;
+        }
+
+        .story-box img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            margin: 20px 0;
+        }
+
+        .story-box h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.6rem;
+        }
+
+        .story-box p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        #confetti {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* HEART PARTICLES */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 40px;
+            pointer-events: none;
+            animation: floatUp 3.50s ease-out forwards;
+            z-index: 999;
+        }
+
+        /* SCROLL BASE */
+        .memory,
+        .gift-card,
+        .valentine-card,
+        .week-card {
+            opacity: 0;
+            transform: translateY(60px) scale(0.92);
+            transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* WHEN VISIBLE */
+        .memory.show,
+        .gift-card.show,
+        .valentine-card.show,
+        .week-card.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .insta-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s ease;
+            z-index: 9999;
+        }
+
+        .insta-popup.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .insta-box {
+            width: 320px;
+            max-width: 90%;
+            background: linear-gradient(145deg, #ff8fab, #ffd6e0);
+            border-radius: 26px;
+            padding: 28px 22px;
+            text-align: center;
+            transform: scale(0.85);
+            transition: 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 40px 120px rgba(255, 77, 109, 0.55);
+            position: relative;
+        }
+
+        .insta-popup.show .insta-box {
+            transform: scale(1);
+        }
+
+        .insta-content p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #5a001e;
+            font-weight: 500;
+            white-space: pre-line;
+        }
+
+        .insta-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #8b0030;
+        }
+
+
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(-120vh) scale(1.6);
+                opacity: 0;
+            }
+        }
+
+
+        /* ANIMATIONS */
+        @keyframes pop {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                box-shadow: 0 25px 60px rgba(255, 77, 109, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 25px 80px rgba(255, 77, 109, 0.7);
+            }
+        }
+
+        @media(max-width:768px) {
+            h1 {
+                font-size: 2.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>When Chandler & Monica Met </h1>
+        <p class="subtitle">Oreo ❤️ Lassi • Forever</p>
+    </header>
+
+    <h2 class="section-title special-names">
+        Shivi <span class="and"> & </span> <span class="lav">Lav</span>
+    </h2>
+
+
+    <div class="memories-grid">
+        <div class="memory" onclick="openMemory('m2')">
+            <span class="secret" onclick="reveal(event,'I knew you were special that day ✨')">💗</span>
+            <video src="images/first.mp4"></video>
+            <div class="memory-text">
+                <h3>The Best Meet</h3><span>5 October 2024</span>
+            </div>
+        </div>
+        <div class="memory" onclick="openMemory('m1')">
+            <span class="secret" onclick="reveal(event,'You changed my life forever ❤️')">💗</span>
+            <img src="images/gift.jpeg">
+            <div class="memory-text">
+                <h3>The Best Gift !!</h3><span>18th January 2026</span>
+            </div>
+        </div>
+
+        <div class="memory" onclick="openMemory('m3')">
+            <span class="secret" onclick="reveal(event,'Even our fights make us stronger 💪')">💗</span>
+            <img src="images/journey.jpeg">
+            <div class="memory-text">
+                <h3>The Best Journey !!</h3><span>14th August 2025</span>
+            </div>
+        </div>
+
+        <div class="memory" onclick="openMemory('m4')">
+            <span class="secret" onclick="reveal(event,'I choose you. Every lifetime. 💍')">💗</span>
+            <img src="images/commit.jpeg">
+            <div class="memory-text">
+                <h3>Committed</h3><span>17 May 2025</span>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="valentine-title">Valentine Week 💙</h2>
+
+    <section class="valentine-week">
+        <div class="week-grid">
+
+            <div class="week-card" data-day="rose" onclick="openWeek(this)">
+                <img src="images/rose.jpeg">
+                <div class="week-text">
+                    <h3>Rose Day 🌹</h3>
+                    <span>Mahak ki Mahak(The rose),</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="propose" onclick="openWeek(this)">
+                <img src="images/propose.jpeg">
+                <div class="week-text">
+                    <h3>Propose Day 💍</h3>
+                    <span>I’ll will love you always !</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="chocolate" onclick="openWeek(this)">
+                <img src="images/choco.jpeg">
+                <div class="week-text">
+                    <h3>Choco Day 🍫</h3>
+                    <span>chatpate fights & meetha love</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="teddy" onclick="openWeek(this)">
+                <img src="images/teddy.jpeg">
+                <div class="week-text">
+                    <h3>Teddy Day 🧸</h3>
+                    <span>Mine Tight hug</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="promise" onclick="openWeek(this)">
+                <img src="images/promise.jpeg" >
+                <div class="week-text">
+                    <h3>Promise Day 🤞</h3>
+                    <span>No matter what, always us</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="hug" onclick="openWeek(this)">
+                <img src="images/hug.jpeg" >
+                <div class="week-text">
+                    <h3>Hug Day 🤗</h3>
+                    <span>Tight is not Tight enough</span>
+                </div>
+            </div>
+
+            <div class="week-card" data-day="kiss" onclick="openWeek(this)">
+                <img src="images/kiss.jpeg" >
+                <div class="week-text">
+                    <h3>Kiss Day😘💋</h3>
+                    <span>MY ForeHead My Lips.</span>
+                </div>
+            </div>
+
+
+            <div class="week-card" data-day="valentine" onclick="openWeek(this)">
+                <img src="images/valentine.jpeg">
+                <div class="week-text">
+                    <h3>The V Day ❤️</h3>
+                    <span>You. Me. Forever.</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <h2 class="section-title">
+        Valentine <font color="white">Gifts</font>
+        <font color="#00b4ff" style="text-shadow:0 0 12px #00b4ff;">For You</font>
+    </h2>
+
+    <div class="gift-grid">
+        <!-- GIFT 1 -->
+        <div class="gift-card blue-neon" onclick="openGift('rose')">
+            <img src="images/Rose.jpg" alt="Rose Bouquet">
+            <h2>Gift 1</h2>
+            <h3>Rose Bouquet 🌹</h3>
+        </div>
+
+        <!-- GIFT 2 -->
+        <div class="gift-card pink-neon" onclick="openGift('letter')">
+            <img src="images/letter.jpg" alt="Love Letter">
+            <h2>Gift 2</h2>
+            <h3>Love Letter 💌</h3>
+        </div>
+
+    </div>
+    <div class="story-modal" id="giftModal">
+        <canvas id="confetti"></canvas>
+
+        <div class="story-box">
+            <span class="close" onclick="closeGift()">×</span>
+            <h2 id="giftTitle"></h2>
+            <img id="giftImg" style="width:100%; object-fit:cover; ">
+            <p id="giftText"></p>
+        </div>
+    </div>
+
+
+    <footer>
+        Happy Valentine’s Day My Lassi ❤️
+        <br>Forever Yours — Oreo
+    </footer>
+
+    <!-- MEMORY MODAL -->
+    <div class="memory-modal" id="memoryModal">
+        <div class="memory-box">
+            <span class="close" onclick="closeMemory()">×</span>
+
+            <h2 id="memTitle"></h2>
+
+            <img id="memImg" src="" alt="Memory Image" class="modal-image">
+
+            <p id="memText"></p>
+            <div class="date" id="memDate"></div>
+        </div>
+    </div>
+    <div id="instaPopup" class="insta-popup">
+        <div class="insta-box">
+            <span class="insta-close" onclick="closeInsta()">×</span>
+            <div class="insta-content">
+                <p id="instaMessage"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <audio id="song" src="images/love.mp3"></audio>
+    <div class="music-btn" onclick="toggleMusic()">🎵 Play our song</div>
+
+    <script>
+        window.addEventListener("scroll", () => {
+            if (Math.random() > 0.85) {
+                const heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.color = Math.random() > 0.5 ? "#ff4d6d" : "#00b4ff";
+                heart.style.fontSize = (12 + Math.random() * 14) + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 3500);
+            }
+        });
+        // 1. Updated Data with Images
+        const memories = {
+            m1: {
+                title: "The Best Gift !!",
+                image: "images/gifts.jpeg", // Matches your grid image
+                text: "Two strangers.\nOne accidental beginning.\nAnd destiny smiled.",
+                date: "18th January 2026"
+            },
+            m2: {
+                title: "The Best Meet",
+                image: "images/fmeet.jpeg", // You can use a snapshot of your video here or the video thumbnail
+                text: "Screens faded.\nHands trembled.\nHearts stayed.",
+                date: "5 October 2024"
+            },
+            m3: {
+                title: "Meri Humsafar",
+                image: "images/journey1.jpeg",
+                text: "We fight loud.\nLove louder.\nChoose always.",
+                date: "14th August 2025"
+            },
+            m4: {
+                title: "The Forever",
+                image: "images/forever.jpeg",
+                text: "Independence lost.\nForever gained.\nLove won.",
+                date: "17 May 2025"
+            }
+        };
+
+        function openMemory(id) {
+            const modal = document.getElementById("memoryModal");
+            const title = document.getElementById("memTitle");
+            const text = document.getElementById("memText");
+            const date = document.getElementById("memDate");
+            const img = document.getElementById("memImg"); // Select the image tag
+
+            // Set content
+            title.innerText = memories[id].title;
+            text.innerText = memories[id].text;
+            date.innerText = memories[id].date;
+
+            // Set Image Source
+            if (memories[id].image) {
+                img.src = memories[id].image;
+                img.style.display = "block"; // Show image
+            } else {
+                img.style.display = "none"; // Hide if no image exists
+            }
+
+            modal.style.display = "flex";
+        }
+
+        function closeMemory() {
+            document.getElementById("memoryModal").style.display = "none";
+        }
+
+        function reveal(e, msg) {
+            e.stopPropagation();
+            alert(msg);
+        }
+
+        function toggleMusic() {
+            let s = document.getElementById("song");
+            s.paused ? s.play() : s.pause();
+        }
+        const gifts = {
+            rose: {
+                title: "Happy Valentine’s Day 🌹",
+                img: "images/rose1.jpg",
+                text: "This rose bouquet is for the girl who made my world bloom. You are my forever favorite person."
+            },
+            letter: {
+                title: "From My Heart 💌",
+                img: "images/loveletter.jpg",
+                text: "Every word I write is filled with you. Loving you is the easiest thing I have ever done."
+            }
+        };
+
+        function openGift(id) {
+            giftModal.style.display = "flex";
+            giftTitle.innerText = gifts[id].title;
+            giftImg.src = gifts[id].img;
+            giftText.innerText = gifts[id].text;
+            startConfetti();
+        }
+
+        function closeGift() {
+            giftModal.style.display = "none";
+        }
+        const cuteMessages = {
+            rose: "A rose for the girl who makes my life bloom 🌹",
+            propose: "I’d choose you again… even today 💍",
+            chocolate: "Life is sweeter with you 🍫",
+            teddy: "Sending you the warmest hug today 🧸",
+            promise: "I promise — always you 🤞",
+            hug: "If I were there, I’d never let go 🤍",
+            kiss: "One kiss, sealed forever 😘",
+            valentine: "Happy Valentine’s Day, my love ❤️"
+        };
+        function openWeek(card) {
+            const dayKey = card.getAttribute("data-day");
+            const isToday = card.hasAttribute("data-today");
+
+            const title = card.querySelector(".week-text h3")?.innerText || "";
+            const cuteLine = cuteMessages[dayKey] || "";
+
+            let message = cuteLine;
+
+            if (isToday) {
+                message =
+                    "✨ Today’s Special ✨\n\n" +
+                    cuteLine +
+                    "\n\n🥰";
+            }
+
+            document.getElementById("instaMessage").innerText = message;
+            document.getElementById("instaPopup").classList.add("show");
+        }
+        function closeInsta() {
+            document.getElementById("instaPopup").classList.remove("show");
+        }
+        const valentineSchedule = {
+            7: "rose",
+            8: "propose",
+            9: "chocolate",
+            10: "teddy",
+            11: "promise",
+            12: "hug",
+            13: "kiss",
+            14: "valentine"
+        };
+
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth(); // February = 1
+
+        if (month === 1 && valentineSchedule[day]) {
+            const todayKey = valentineSchedule[day];
+            const todayCard = document.querySelector(
+                `.week-card[data-day="${todayKey}"]`
+            );
+
+            if (todayCard) {
+                todayCard.classList.add("today");
+                todayCard.setAttribute("data-today", "true");
+            }
+        }
+        /* CONFETTI */
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let conf = [];
+        function startConfetti() {
+            conf = [];
+            for (let i = 0; i < 200; i++) {
+                conf.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 6 + 2,
+                    d: Math.random() * 5 + 2
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            conf.forEach(c => {
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+                ctx.fillStyle = Math.random() > 0.5 ? "#ff4d6d" : "#00b4ff";
+                ctx.fill();
+                c.y += c.d;
+                if (c.y > canvas.height) c.y = 0;
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+        const animatedItems = document.querySelectorAll(
+            '.memory, .gift-card, .valentine-card, .week-card'
+        );
+
+        const loopObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                } else {
+                    entry.target.classList.remove("show"); // RESET
+                }
+            });
+        }, { threshold: 0.25 });
+
+        animatedItems.forEach(item => loopObserver.observe(item));
+
+    </script>
+
+</body>
+
+</html>
