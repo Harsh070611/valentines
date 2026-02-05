@@ -592,28 +592,51 @@
             height: 620px;
             background: linear-gradient(160deg, #ff4d6d, #00b4ff);
             border-radius: 40px;
-            padding: 30px;
+            padding: 26px;
             text-align: center;
             color: white;
             position: relative;
             animation: pop 0.5s ease;
+
+            display: flex;
+            flex-direction: column;
         }
+
 
         .story-box img {
             width: 100%;
-            height: 260px;
+            height: 240px;
             object-fit: contain;
-            margin: 20px 0;
+            margin-bottom: 8px;
+            flex-shrink: 0;
         }
+
 
         .story-box h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.6rem;
+            margin: 6px 0 10px;
+            flex-shrink: 0;
         }
+
 
         .story-box p {
             font-size: 1.15rem;
             line-height: 1.8;
+        }
+        #giftText {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin: 0;
+
+            flex: 1;
+            /* takes remaining space */
+            overflow-y: auto;
+            /* scroll when text is long */
+            padding: 0 6px;
+
+            white-space: pre-line;
+            /* IMPORTANT for JS text */
         }
 
         #confetti {
@@ -755,8 +778,7 @@
 
     <header>
         <h1>When Chandler & Monica Met </h1>
-        <h3 class="subtitle">The Drink(life) Oreo Lassi Shake where nuts are love, romance, care, enjoy and ice cube is me🥵 who melts by looking at my lassi🔥</h3>
-        <h2 class = "subtitle"> Oreo ❤️ Lassi • Forever</h2>
+        <p class="subtitle">Oreo ❤️ Lassi • Forever</p>
     </header>
 
     <h2 class="section-title special-names">
@@ -856,7 +878,7 @@
                 <img src="images/kiss.jpeg">
                 <div class="week-text">
                     <h3>Kiss Day😘💋</h3>
-                    <span>Your ForeHead My Lips.</span>
+                    <span>MY ForeHead My Lips.</span>
                 </div>
             </div>
 
@@ -891,6 +913,7 @@
             <h2>Gift 2</h2>
             <h3>Love Letter 💌</h3>
         </div>
+
 
     </div>
     <div class="story-modal" id="giftModal">
